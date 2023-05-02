@@ -7,8 +7,23 @@ const Todo = () => {
   const [items, setItems] = useState([]);
   
   const addItem = (x) =>{
-     setItems([...items, x]);
+     const obj = {
+        id : new Date().getTime().toString(),
+        name : x
+     };
+     setItems([...items, obj]);
      setInputData("");
+  }
+
+  const deleteItem = (x) => {
+    const newList = items.filter( (curr) =>{
+         return (curr.id !== x);
+    });
+    setItems(newList);
+  }
+
+  const deleteAll = () => {
+    setItems([]);
   }
 
   return (
@@ -32,27 +47,31 @@ const Todo = () => {
              
              {/* add items    */}
             <div className = "showItems">
-                {/* <div className='eachItem'> */}
+               
                     {items.map((curr, index) => {
                             return(
                                 <>
                                    <div className='eachItem' key='index'>
-                                      <h3>{curr}</h3>
+                                      <h3>{curr.name}</h3>
                                       <div className='todo-btn'>
                                             <i class="far fa-edit add-btn"></i>
-                                            <i class="far fa-trash-alt add-btn"></i>
+                                            <i class="far fa-trash-alt add-btn"
+                                             onClick={ () => deleteItem(curr.id)}
+                                            ></i>
                                       </div>  
                                    </div>
                                 </>
                             );
                     })}
                     
-                {/* </div> */}
+                
             </div>  
 
              {/* remove all items  */}
             <div className='showItems'>
-                <button className='btn effect04' data-sm-link-text = "Remove All">
+                <button className='btn effect04' data-sm-link-text = "Remove All"
+                 onClick={ () => deleteAll()}
+                >
                     <span>Check List</span>
                 </button>
             </div>
