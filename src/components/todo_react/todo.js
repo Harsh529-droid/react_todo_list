@@ -7,7 +7,7 @@ const Todo = () => {
     const list = localStorage.getItem('myTodoData');
 
     if(list){
-       return JSON.parse(list);
+       return JSON.parse(list); //converts json to array
     }else{
         return [];
     }
@@ -38,8 +38,8 @@ const Todo = () => {
 
 //   adding local storage 
  useEffect(() => {
-    localStorage.setItem("myTodoData", JSON.stringify(items));
- },[items]);
+    localStorage.setItem("myTodoData", JSON.stringify(items)); 
+ },[items]);               //stringify : converts array to stringified JSON
 
   return (
     <div className='main-div'>
